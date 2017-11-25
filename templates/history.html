@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <tr><th>Transaction Time</th><th>Symbol</th><th>+Bought/-Sold</th><th>Price</th><th>Total Cost</th></tr>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction["sale_time"] }}
+                <td>{{ transaction["symbol"] }}</td>
+                <td>{{ transaction["quantity"] }}</td>
+                <td>{{ usd(transaction["price"]) }}</td>
+                <td>{{ usd(transaction["quantity"] * transaction["price"]) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
