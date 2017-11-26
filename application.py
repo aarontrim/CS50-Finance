@@ -3,6 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session, url
 from flask_session import Session
 from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
+import os
 
 from helpers import *
 
@@ -28,7 +29,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
+
+db = SQL("sqlite:///{}".format(os.path.join(os.path.dirname(__file__), "finance.db")))
 
 @app.route("/")
 @login_required
